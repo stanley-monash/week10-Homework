@@ -1,0 +1,115 @@
+body *{
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+body {
+    background-color: white;
+}
+
+.page {
+    width: 1600px;
+    background-color: white;
+    margin: auto;
+    padding: 10px;
+    padding-top: 10px;
+}
+
+.vis-container {
+    width: 100%;
+}
+
+.description h2,h1 {
+    margin-top: 0px;
+}
+
+.description-right {
+    padding-left: 20px;
+}
+
+.description-left {
+    padding-right: 20px;
+}
+
+.pure-g {
+    margin-bottom: 40px;
+}
+
+.small-font {
+    font-size: 14px;
+}
+
+.center {
+    margin: auto;
+    padding: 10px;
+}
+
+/* Container holding the image and the text */
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+
+  .container-img {
+    width: 950px;
+}
+  
+  /* Bottom left text */
+  .bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+  }
+  
+  /* Top left text */
+  .top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+  }
+  
+  /* Top right text */
+  .top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+  }
+  
+  /* Bottom right text */
+  .bottom-right {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+  }
+  
+  /* Centered text */
+  .centered-title {
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    right: 10%;
+    transform: translate(-50%, -50%);
+  }
+
+   /* Centered text */
+   .centered-subtitle {
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0px;
+    padding: 10px
+}
+
+.section1-paragraph {
+    max-width: 550px
+}

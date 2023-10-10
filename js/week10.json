@@ -1,0 +1,145 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 450,
+    "height": 250,
+    "padding": 30,
+    "background": "white",
+    "title": "Happiness score in relations to GDP",
+    "data": {
+      "url": "https://raw.githubusercontent.com/stanley-monash/week10-Homework/main/data/2019.csv"
+    },
+    "params": [
+      {
+        "name": "population",
+        "value": 0,
+        "bind": {
+          "input": "range",
+          "min": 0,
+          "max": 100000000,
+          "step": 1000000,
+          "name": "Minimum Population: "
+        }
+      },
+      {
+        "name": "Continent_selection",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "North America",
+            "South America",
+            "Europe",
+            "Africa",
+            "Asia",
+            "Oceania"
+          ],
+          "labels": [
+            "Show All",
+            "North America",
+            "South America",
+            "Europe",
+            "Africa",
+            "Asia",
+            "Oceania"
+          ],
+          "name": "Continent Selection: "
+        }
+      }
+    ],
+    "transform": [
+        {"filter": "datum.Population > population"}, 
+      {
+        "filter": "Continent_selection == null || datum.Continent == Continent_selection"
+      }
+    ],
+    "encoding": {
+      "x": {
+        "field": "GDP_per_capita",
+        "type": "quantitative",
+        "title": "GDP per capita",
+        "axis": {"tickCount": 7},
+        "scale": {"type": "linear", "domain": [0, 1.7]}
+      },
+      "y": {
+        "field": "Score",
+        "type": "quantitative",
+        "axis": {"tickCount": 6},
+        "scale": {"type": "linear", "domain": [2.8, 7.8]}
+      }
+    },
+    "layer": [
+      {
+        "mark": "circle",
+        "encoding": {
+          "size": {
+            "field": "Population",
+            "type": "quantitative",
+            "scale": {
+              "type": "threshold",
+              "domain": [1000000, 10000000, 50000000, 100000000,500000000],
+              "range": [10, 50, 150, 200, 300, 400]
+            },
+            "legend": {"format": ".2s"}
+          },
+          "color": {
+            "field": "Continent",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "North America",
+                "South America",
+                "Europe",
+                "Africa",
+                "Asia",
+                "Oceania"
+              ],
+              "range": [
+                "#e41a1c",
+                "#984ea3",
+                "#ff7f00",
+                "#a6cee3",
+                "#377eb8",
+                "#a65628"
+              ]
+            }
+          },
+          "opacity": {"value": 0.6},
+          "tooltip": [
+            {"field": "Country_or_region", "type": "nominal"},
+            {"field": "Continent", "type": "nominal"},
+            {"field": "GDP_per_capita", "type": "quantitative", "format": ".2f"},
+            {"field": "Score", "type": "quantitative", "format": ".2f"},
+            {"field": "Population", "type": "quantitative", "format": ","}
+                  ]
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "right",
+          "baseline": "middle",
+          "dx": -12,
+          "fontSize": 11.5,
+          "fontStyle": "italic"
+        },
+        "encoding": {
+          "text": {"field": "Country_or_region", "type": "nominal"},
+          "color": {"value": "black"},
+          "opacity": {
+            "condition": {
+              "test": "datum['Country_or_region'] == 'China' || datum['Country_or_region'] == 'Singapore' || datum['Country_or_region'] == 'Australia' || datum['Country_or_region'] == 'New Zealand' || datum['Country_or_region'] == 'Italy' || datum['Country_or_region'] == 'Yemen' ||  datum['Country_or_region'] == 'United States'",
+              "value": 1
+            },
+            "value": 0
+          },
+          "tooltip": [
+            {"field": "Country_or_region", "type": "nominal"},
+            {"field": "Continent", "type": "nominal"},
+            {"field": "GDP_per_capita", "type": "quantitative", "format": ".2f"},
+            {"field": "Score", "type": "quantitative", "format": ".2f"},
+            {"field": "Population", "type": "quantitative", "format": ","}
+                  ]
+        }
+      }
+    ]
+  }
